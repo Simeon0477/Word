@@ -3,7 +3,7 @@
 
 extern char** lines;
 extern int nb_lines;
-extern int capacite;
+extern int capacity;
 
 void growth();
 void loadFile(const char* nom_fichier);
