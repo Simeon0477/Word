@@ -5,7 +5,7 @@ extern char** lines;
 extern int nb_lines;
 extern int capacite;
 
-void reallocation();
+void growth();
 void loadFile(const char* nom_fichier);
 void showLines();
 void addLine(const char* line);

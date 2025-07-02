@@ -4,18 +4,17 @@
 
 #include "../header/word.h"
 
+#define MAX_LINES 1000
+
 char** lines = NULL;
 int nb_lines = 0;
-int capacity = 0;
+int capacity = 10;
 
-//Réallocation de mémoire
-void reallocation() {
+//Agrandissement du tableau
+void growth() {
     if (nb_lines >= capacity) {
-        capacity = (capacity == 0) ? 10 : capacity * 2;
+        capacity += 10;
         char** temp = realloc(lines, capacity * sizeof(char*));
-        if (!temp) {
-            perror("Erreur de réallocation");
-        }
         lines = temp;
     }
 }
@@ -28,9 +27,10 @@ void loadFile(const char* nom_fichier) {
         return;
     }
 
-    char read_lines[256];
-    while (fgets(read_lines, 256, fichier)) {
-        reallocation();
+    char read_lines[MAX_LINES];
+    lines = malloc(sizeof(char*) * capacity);
+    while (fgets(read_lines, MAX_LINES, fichier)) {
+        growth();
         lines[nb_lines] = malloc(strlen(read_lines) + 1);
         strcpy(lines[nb_lines], read_lines);
         nb_lines++;
@@ -49,7 +49,7 @@ void showLines() {
 
 //Ajout d'une ligne
 void addLine(const char* line) {
-    reallocation();
+    growth();
     lines[nb_lines] = malloc(strlen(line) + 1);
     strcpy(lines[nb_lines], line);
     nb_lines++;
@@ -67,7 +67,7 @@ void deleteLine(int index) {
     free(lines[index - 1]);
     for (int i = index - 1; i < nb_lines - 1; i++) {
         lines[i] = lines[i + 1];
-    }--------
+    }
     nb_lines--;
 }
 

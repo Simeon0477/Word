@@ -4,8 +4,8 @@
 
 #include "header/word.h"
 
-char nom_fichier[256];
-char line[256];
+char nom_fichier[100];
+char line[500];
 int choix, ind;
 
 int main() {
@@ -42,13 +42,13 @@ int main() {
                 //Entrée de la ligne
                 getchar();
                 printf("Entrez la ligne à ajouter : ");
-                fgets(line, 256, stdin);
+                fgets(line, 500, stdin);
 
                 addLine(line);
                 saveData(nom_fichier);
 
                 break;
-
+                                            
             case 3:
                 printf("\n\033[32m3 - Modifier une ligne \n\n\033[0m");
 
@@ -66,7 +66,7 @@ int main() {
                 //Entrée de la ligne
                 getchar();
                 printf("Entrez la ligne à modifier : ");
-                fgets(line, 256, stdin);
+                fgets(line, 500, stdin);
 
                 editLine(ind, line);
                 saveData(nom_fichier);
