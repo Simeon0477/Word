@@ -68,6 +68,7 @@ void deleteLine(int index) {
     for (int i = index - 1; i < nb_lines - 1; i++) {
         lines[i] = lines[i + 1];
     }
+    free(lines[nb_lines - 1]);
     nb_lines--;
 }
 
@@ -87,7 +88,7 @@ void saveData(const char* nom_fichier) {
 
 //Libération de la mémoire
 void freeMemory() {
-    for (int i = 0; i < nb_lines; i++) {
+    for (int i = 0; i < nb_lines - 1; i++) {
         free(lines[i]);
     }
 }
